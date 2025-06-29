@@ -1,0 +1,62 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h4>Crie sua conta para começar.</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Nome" label-placement="floating" fill="solid" formControlName="name">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="E-mail" type="email" label-placement="floating" fill="solid" formControlName="email"
+            placeholder="email@domain.com" errorText="Não é um endereço de e-mail válido.">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input label="Senha" type="password" label-placement="floating" fill="solid" formControlName="password"
+            errorText="O comprimento deve estar entre 8 e 128.">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <ion-checkbox labelPlacement="end" formControlName="worker">Pretendo prestar serviços na
+            plataforma.</ion-checkbox>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-margin-top">
+          <ion-button [disabled]="signupForm.invalid" size="default" color="secondary" expand="block"
+            type="submit">Registrar</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="ion-text-center ion-margin-top">
+          <ion-label>
+            Já tem uma conta? <ion-router-link routerLink="/login">Entrar</ion-router-link>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+</ion-content>

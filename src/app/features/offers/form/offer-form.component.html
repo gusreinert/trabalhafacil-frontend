@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons *ngIf="canGoToAddress()" slot="end">
+      <ion-button [disabled]="disableGoToAddress()" color="primary" (click)="goToAddress()">Avançar</ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="canConfirm()" slot="end">
+      <ion-button [disabled]="disableConfirm()" color="primary" (click)="confirm()">Finalizar</ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start">
+      <ion-button color="danger" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="ion-padding">
+  <ion-segment [(ngModel)]="selectedSegment" class="ion-hide">
+    <ion-segment-button value="offer"></ion-segment-button>
+    <ion-segment-button value="address"></ion-segment-button>
+  </ion-segment>
+
+  <div [@fadeInOut]="selectedSegment" class="page-content">
+    <ng-container [ngSwitch]="selectedSegment">
+      <div *ngSwitchCase="'offer'">
+        <form [formGroup]="offerForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="8" class="ion-margin-bottom">
+                <ion-select interface="popover" label="Profissional" label-placement="floating" fill="outline"
+                  formControlName="occupation">
+                  @for (occupation of occupations; track occupation) {
+                  <ion-select-option [value]="occupation.key">{{ occupation.value }}</ion-select-option>
+                  }
+                </ion-select>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-input label="Título curto" label-placement="floating" fill="outline" formControlName="title">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-textarea rows="8" label="Descrição" label-placement="floating" fill="outline"
+                  formControlName="description">
+                </ion-textarea>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </div>
+
+      <div *ngSwitchCase="'address'">
+        <form [formGroup]="addressForm">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4" class="ion-margin-bottom">
+                <ion-input label="CEP" label-placement="floating" fill="outline" formControlName="postalCode"
+                  [maskito]="postalCodeMask" [maskitoElement]="maskPredicate">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-input label="Endereço" label-placement="floating" fill="outline"
+                  formControlName="street"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-input label="Bairro" label-placement="floating" fill="outline"
+                  formControlName="district"></ion-input>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="2">
+                <ion-input label="UF" label-placement="floating" fill="outline" formControlName="state"></ion-input>
+              </ion-col>
+              <ion-col>
+                <ion-input label="Cidade" label-placement="floating" fill="outline" formControlName="city"></ion-input>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>
