@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Avaliar</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()">Fechar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-card>
+        <ion-card-content>
+            <div class="ion-text-center ion-margin-bottom">
+                <ion-button fill="clear" *ngFor="let star of stars; let i = index" (click)="setRating(i + 1)">
+                    <ion-icon [name]="i < rating ? 'star' : 'star-outline'" color="warning" style="font-size: 36px;">
+                    </ion-icon>
+                </ion-button>
+            </div>
+
+            <ion-item lines="none">
+                <ion-label position="stacked">Comentário</ion-label>
+                <ion-textarea [(ngModel)]="comment" autoGrow="true" rows="5"
+                    placeholder="Escreva algo sobre o serviço...">
+                </ion-textarea>
+            </ion-item>
+
+            <ion-button expand="block" class="ion-margin-top" (click)="confirm()" [disabled]="rating === 0">
+                Enviar Avaliação
+            </ion-button>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

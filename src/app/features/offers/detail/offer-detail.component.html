@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons *ngIf="canEndOffer()" slot="start">
+            <ion-button [disabled]="disableEndOffer()" color="primary" (click)="doEndOffer()">Finalizar</ion-button>
+        </ion-buttons>
+
+        <ion-buttons *ngIf="canHireCandidate()">
+            <ion-button [disabled]="disableHireCandidate()" color="primary" (click)="doHireCandidate()">Contratar</ion-button>
+        </ion-buttons>   
+             
+        <ion-buttons slot="end">
+            <ion-button color="medium" (click)="close()">Fechar</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="offer?.id" color="light">
+    <ion-refresher slot="fixed" (ionRefresh)="doHandleRefresh($event)">
+        <ion-refresher-content>
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card>
+        <ion-card-content>
+            <ion-grid [fixed]="true">
+                <ion-row style="margin-bottom: 64px;">
+                    <ion-col>
+                        <ion-card-title class="ion-text-capitalize">{{offer.title }}</ion-card-title>
+                        <ion-card-subtitle>Profissional: {{offer.occupation}}</ion-card-subtitle>
+                    </ion-col>
+                    <ion-col size="2" class="ion-text-end">
+                        <ion-avatar style="width: 64px; height: 64px;">
+                            <img [src]="offer.user.avatar" alt="avatar">
+                        </ion-avatar>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <strong>Problema: </strong>
+                        <ion-note>{{offer.description}}</ion-note>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+        <div *ngIf="isWorker()">
+            <ion-button color="secondary" [disabled]="cannotApplyToOffer()" (click)="doApplyToOffer()" expand="block">ME
+                APLICAR</ion-button>
+        </div>
+    </ion-card><br /><br />
+
+    <div *ngIf="isUser() && offer.candidates.length > 0">
+        <ion-note color="medium" class="ion-margin-horizontal ion-text-justify">Candidatos que se aplicaram ao anúncio estão
+            aguardando.</ion-note>
+        <ion-card style="height: auto">
+            <ion-list-header>
+                <label>CANDIDATOS</label>
+            </ion-list-header>
+            <ion-list>
+                <ion-item *ngFor="let candidate of offer.candidates" button (click)="selectCandidate(candidate.id)"
+                    [class.selecionado]="candidate.selected">
+                    <ion-avatar slot="start">
+                        <ion-icon name="person-circle-outline" size="large"></ion-icon>
+                    </ion-avatar>
+                    <ion-label>{{ candidate.user?.name }}</ion-label>
+                    <ion-icon slot="end" [name]="candidate.selected ? 'radio-button-on' : 'radio-button-off'"
+                        color="primary"></ion-icon>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    </div>
+</ion-content>

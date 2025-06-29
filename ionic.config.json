@@ -1,0 +1,7 @@
+{
+  "name": "trabalhafacil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

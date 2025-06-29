@@ -1,0 +1,1 @@
+export const postalCodeMask = [/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/];

@@ -1,0 +1,42 @@
+ion-input,
+ion-select,
+ion-textarea {
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color: var(--ion-color-primary);
+}
+
+ion-input.ng-invalid.ng-touched,
+ion-input.ng-invalid.ng-dirty {
+  --highlight-color-focused: var(--ion-color-danger);
+  --highlight-color: var(--ion-color-danger);
+}
+
+ion-input.ng-valid.ng-touched,
+ion-input.ng-valid.ng-dirty {
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color: var(--ion-color-primary);
+}
+
+ion-select.ng-invalid.ng-touched,
+ion-select.ng-invalid.ng-dirty {
+  --highlight-color-focused: var(--ion-color-danger);
+  --highlight-color: var(--ion-color-danger);
+}
+
+ion-select.ng-valid.ng-touched,
+ion-select.ng-valid.ng-dirty {
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color: var(--ion-color-primary);
+}
+
+ion-textarea.ng-invalid.ng-touched,
+ion-textarea.ng-invalid.ng-dirty {
+  --highlight-color-focused: var(--ion-color-danger);
+  --highlight-color: var(--ion-color-danger);
+}
+
+ion-textarea.ng-valid.ng-touched,
+ion-textarea.ng-valid.ng-dirty {
+  --highlight-color-focused: var(--ion-color-primary);
+  --highlight-color: var(--ion-color-primary);
+}

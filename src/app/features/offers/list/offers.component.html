@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Anúncios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-refresher slot="fixed" (ionRefresh)="doHandleRefresh($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="offers && offers.length > 0; else noOffers">
+    <ng-container *ngFor="let offer of offers;">
+      <ion-card button (click)="openModalOfferDetail(offer)" class="clickable-card">
+        <ion-ripple-effect></ion-ripple-effect>
+
+        <ion-card-content>
+          <ion-grid [fixed]="true">
+            <ion-row style="margin-bottom: 32px;">
+              <ion-col size="2">
+                <ion-avatar style="width: 48px; height: 48px;">
+                  <img [src]="offer.user.avatar" alt="avatar">
+                </ion-avatar>
+              </ion-col>
+              <ion-col>
+                <ion-card-title>{{offer.title }}</ion-card-title>
+                <ion-card-subtitle>Profissional: {{offer.occupation}}</ion-card-subtitle>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-align-self-center">
+                <ion-note>Toque para mais detalhes</ion-note> 
+              </ion-col>
+              <ion-col class="ion-text-end">
+                <ion-chip>
+                  <ion-label>{{offer.candidates.length}} candidato(s)</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </div>
+
+  <ng-template #noOffers>
+    <div class="empty-data">
+      <ion-text color="medium">
+        <h5>Nenhum resultado encontrado</h5>
+        <ion-note>Crie seu primeiro anúncio e começe a aproveitar!</ion-note>
+      </ion-text>
+    </div>
+  </ng-template>
+</ion-content>
